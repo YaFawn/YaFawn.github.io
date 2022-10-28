@@ -1,0 +1,14 @@
+---
+title: "Feng Yan's resume"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cerulean
+---
+
+
+
+<center>
+<img src="images/resume.jpg" style="width:90%">
+</center>
