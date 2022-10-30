@@ -1,0 +1,88 @@
+---
+title: "Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+library(flexdashboard)
+```
+
+```{r data manipulation, include=FALSE}
+noaa_df = 
+  ny_noaa %>% 
+  janitor::clean_names() %>% 
+  separate(date, into = c("year", "month", "day"), sep = '-') %>% 
+  rename(
+    tmax_celcius = tmax,
+    tmin_celcius = tmin,
+    prcp_mm = prcp,
+    snow_mm = snow
+  ) %>% 
+  mutate(
+    tmax_celcius = as.numeric(tmax_celcius)/10,
+    tmin_celcius = as.numeric(tmin_celcius)/10,
+    prcp_mm = prcp_mm/10,
+    year = as.numeric(year)
+  )
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+  noaa_df %>% 
+  filter(month == "07" )%>% 
+  group_by(year,month,id) %>% 
+  summarize(average_tmax = mean(tmax_celcius, na.rm = TRUE)) %>% 
+  plot_ly(
+    x = ~year, y = ~average_tmax,
+    type = "scatter", mode = "markers"
+  )%>% 
+  layout(title = "max temperature in July in each station across years",
+         xaxis  = list(title = "year"),
+         yaxis  = list(title = "avarage max temperature (celcius)")
+         ) 
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+noaa_df %>% 
+  filter(snow_mm < 100 & snow_mm >0) %>% 
+  group_by(year) %>% 
+  plot_ly(
+   y = ~snow_mm, x = ~year, type = "box") %>% 
+   layout(title = "snow distribution by year (between 0mm and 100mm)",
+         xaxis  = list(title = "year"),
+         yaxis  = list(title = "snowfall (mm)")
+         )
+```
+
+### Chart C
+
+```{r}
+tmax_vs_tmin = 
+  noaa_df %>% 
+  drop_na(tmax_celcius, tmin_celcius) %>% 
+  ggplot(aes(x = tmin_celcius, y = tmax_celcius)) + geom_hex()+
+  labs(
+    title = "tmax vs tmin (celcius)",
+      x = "tmin (celcius)",
+      y = "tmax (celcius)"
+  ) +
+  theme(legend.position = "right") +
+  theme(plot.title = element_text(hjust = 0.5))
+ggplotly(tmax_vs_tmin)
+```
+
