@@ -3,9 +3,11 @@ output_dir: "."
 navbar:
   title: "Home"
   right:
-    - text: "Resume"
+    - text: "ABOUT"
+      href: about.html
+    - text: "RESUME"
       href: resume.html
-    - text: "Dashboard"
+    - text: "DASHBOARD"
       href: dashboard.html
     - icon: fa-envelope fa-lg
       href: mailto:<fy2297@cumc.columbia.edu>

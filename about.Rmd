@@ -1,0 +1,30 @@
+---
+title: "Feng's website"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cerulean
+---
+
+# This is Feng's awesome website
+
+This is a photo of myself.
+
+<center>
+<img src="images/Feng.jpg" style="width:45%">
+</center>
+
+
+This is a photo of my family.
+
+<center>
+<img src="images/family.jpg" style="width:45%">
+</center>
+
+
+This is a photo of my pets.
+
+<center>
+<img src="images/pets.jpg" style="width:45%">
+</center>

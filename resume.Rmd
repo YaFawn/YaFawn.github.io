@@ -7,7 +7,10 @@ output:
     theme: cerulean
 ---
 
-
+Here is a pdf version of my resume, you can download it if you want...
+```{r out.height = "460px", out.width='800px', echo=F}
+knitr::include_graphics("resume.pdf")
+```
 
 <center>
 <img src="images/resume.jpg" style="width:90%">

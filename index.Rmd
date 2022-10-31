@@ -7,24 +7,22 @@ output:
     theme: cerulean
 ---
 
-# This is Feng's awesome website
-
-This is a photo of myself.
+# This is Feng's personal website
 
 <center>
-<img src="images/Feng.jpg" style="width:45%">
+<img src="images/welcome.jpg" style="width:45%">
 </center>
 
 
-This is a photo of my family.
 
-<center>
-<img src="images/family.jpg" style="width:45%">
-</center>
+Hi all! This is Feng Yan's website. Please feel free to email me if you have any questions.
 
 
-This is a photo of my pets.
 
-<center>
-<img src="images/pets.jpg" style="width:45%">
-</center>
+Links to other pages:
+
+1. [about me](about.html)
+
+2. [resume up-to-now](resume.html)
+
+3. [dashboard](dashboard.html)
