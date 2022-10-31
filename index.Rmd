@@ -21,7 +21,7 @@ Hi all! This is Feng Yan's website. Please feel free to email me if you have any
 
 Links to other pages:
 
-1. [about me](about.html)
+1. [intro](about.html)
 
 2. [resume up-to-now](resume.html)
 
