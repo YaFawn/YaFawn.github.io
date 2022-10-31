@@ -14,20 +14,30 @@ library(flexdashboard)
 ```
 
 ```{r data manipulation, include=FALSE}
-# randomly pick a sample of size 2000 to better draw plotly graphs
+# randomly pick a sample of size 800 to better draw plotly graphs
 data("instacart")
 insta_df = instacart %>% 
   janitor::clean_names() %>% 
-  sample_n(2000)
+  sample_n(800)
 ```
 
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Chart A
+### Bar Graph
 
 ```{r}
-  
+insta_df %>% 
+  count(aisle) %>% 
+  arrange(-n) %>% 
+  mutate(aisle = fct_reorder(aisle, n, .desc = TRUE)) %>% 
+  plot_ly(
+    x = ~aisle, y = ~n, type = "bar", color = ~aisle, colors = "viridis"
+  ) %>% 
+  layout(title = "Items ordered in each aisle",
+         xaxis  = list(title = "Aisle name"),
+         yaxis  = list(title = "Items ordered")
+         )
 ```
 
 Column {data-width=350}
@@ -36,31 +46,12 @@ Column {data-width=350}
 ### Chart B
 
 ```{r}
-noaa_df %>% 
-  filter(snow_mm < 100 & snow_mm >0) %>% 
-  group_by(year) %>% 
-  plot_ly(
-   y = ~snow_mm, x = ~year, type = "box") %>% 
-   layout(title = "snow distribution by year (between 0mm and 100mm)",
-         xaxis  = list(title = "year"),
-         yaxis  = list(title = "snowfall (mm)")
-         )
+
 ```
 
 ### Chart C
 
 ```{r}
-tmax_vs_tmin = 
-  noaa_df %>% 
-  drop_na(tmax_celcius, tmin_celcius) %>% 
-  ggplot(aes(x = tmin_celcius, y = tmax_celcius)) + geom_hex()+
-  labs(
-    title = "tmax vs tmin (celcius)",
-      x = "tmin (celcius)",
-      y = "tmax (celcius)"
-  ) +
-  theme(legend.position = "right") +
-  theme(plot.title = element_text(hjust = 0.5))
-ggplotly(tmax_vs_tmin)
+
 ```
 
