@@ -14,22 +14,11 @@ library(flexdashboard)
 ```
 
 ```{r data manipulation, include=FALSE}
-noaa_df = 
-  ny_noaa %>% 
+# randomly pick a sample of size 2000 to better draw plotly graphs
+data("instacart")
+insta_df = instacart %>% 
   janitor::clean_names() %>% 
-  separate(date, into = c("year", "month", "day"), sep = '-') %>% 
-  rename(
-    tmax_celcius = tmax,
-    tmin_celcius = tmin,
-    prcp_mm = prcp,
-    snow_mm = snow
-  ) %>% 
-  mutate(
-    tmax_celcius = as.numeric(tmax_celcius)/10,
-    tmin_celcius = as.numeric(tmin_celcius)/10,
-    prcp_mm = prcp_mm/10,
-    year = as.numeric(year)
-  )
+  sample_n(2000)
 ```
 
 Column {data-width=650}
@@ -38,18 +27,7 @@ Column {data-width=650}
 ### Chart A
 
 ```{r}
-  noaa_df %>% 
-  filter(month == "07" )%>% 
-  group_by(year,month,id) %>% 
-  summarize(average_tmax = mean(tmax_celcius, na.rm = TRUE)) %>% 
-  plot_ly(
-    x = ~year, y = ~average_tmax,
-    type = "scatter", mode = "markers"
-  )%>% 
-  layout(title = "max temperature in July in each station across years",
-         xaxis  = list(title = "year"),
-         yaxis  = list(title = "avarage max temperature (celcius)")
-         ) 
+  
 ```
 
 Column {data-width=350}
