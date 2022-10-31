@@ -14,7 +14,7 @@ library(flexdashboard)
 ```
 
 ```{r data manipulation, include=FALSE}
-# randomly pick a sample of size 800 to better draw plotly graphs
+# randomly pick a sample of size 800 to better draw the plotly graphs
 data("instacart")
 insta_df = instacart %>% 
   janitor::clean_names() %>% 
@@ -43,15 +43,30 @@ insta_df %>%
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Chart B
+### Boxplot
 
 ```{r}
-
+insta_df %>% 
+  mutate (department = fct_reorder(department, days_since_prior_order)) %>% 
+  plot_ly(x = ~department, y = ~days_since_prior_order, color = ~department, colors = "viridis", type = "box")%>% 
+  layout(title = "Distribution of days_since_prior_order",
+         xaxis  = list(title = "Department name"),
+         yaxis  = list(title = "Days since prior order")
+         )
 ```
 
-### Chart C
+### Scatterplot
 
 ```{r}
-
+insta_df %>% 
+  count(department) %>% 
+  mutate(department = fct_reorder(department, n, .desc = TRUE)) %>% 
+  plot_ly(
+    x = ~department, y = ~n, type = "scatter", mode = "markers", color = ~department, colors = "viridis"
+  ) %>% 
+  layout(title = "Number of different departments",
+         xaxis  = list(title = "Department name"),
+         yaxis  = list(title = "Numbers of department")
+         )
 ```
 
