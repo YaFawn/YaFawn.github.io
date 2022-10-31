@@ -7,6 +7,8 @@ navbar:
       href: about.html
     - text: "RESUME"
       href: resume.html
+    - text: "LINKEDIN"
+      href: https://www.linkedin.com/feed/
     - text: "DASHBOARD"
       href: dashboard.html
     - icon: fa-envelope fa-lg
